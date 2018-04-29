@@ -1,8 +1,7 @@
 from kfsims.iw_prior import IWPrior
 import numpy as np
 from kfsims import common
-from kfsims.exp_family import update_IW
-from archive import exp_family
+from kfsims import exp_family
 from typing import Tuple, Callable
 from collections import defaultdict
 from filterpy.kalman import KalmanFilter
@@ -69,11 +68,11 @@ class MeasurementNode:
         x = state_prediction
         P = P_prediction
         for i in range(self.N):
-            R, hyp_R = update_IW(init_hyp_R,
+            R, hyp_R = exp_family.update_IW(init_hyp_R,
                                  measurement,
                                  self.H @ x,
                                  self.H @ P @ self.H.T)
-            P, hyp_P = update_IW(init_hyp_P, x, state_prediction, P)
+            P, hyp_P = exp_family.update_IW(init_hyp_P, x, state_prediction, P)
             P, x = common.kalman_correction(self.H, P, R, state_prediction, measurement)
         return x, P, hyp_P, hyp_R
 

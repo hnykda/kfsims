@@ -9,9 +9,12 @@ setup(
     licence="MIT",
     url='https://github.com/GlobalWebIndex/appname',
     install_requires=[
-        'pytest',  # MIT
-        'numpy',
-        'scipy',
-        'networkx',
+        "networkx",
+        "matplotlib",
+        "seaborn",
+        "pandas",
+        "numpy",
+        "scipy",
+        "filterpy",
     ],
 )
